@@ -8,6 +8,6 @@ app.get('/', (req, res) => {
     res.SendFile(__dirname + '/index.html');
 });
 
-app.listen('8080', () => {
-    console.log('Listening..')
+app.listen(process.env.PORT, function() {
+    console.log('Listening on port %d', process.env.PORT);
 });
