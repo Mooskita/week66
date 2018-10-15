@@ -1,7 +1,7 @@
 console.log('js/game/grid.js');
 Grid = function (game, w, h) {
     this.grid = [];
-    this.gridGroup = game.add.group();
+    
     let k;
     for (var i = 0; i < w; i++) {
         this.grid.push([]);
@@ -9,16 +9,17 @@ Grid = function (game, w, h) {
         for (var j = 0; j < h; j++) {
             if (j % 2 == 1)
             {
-                this.grid.push(new Tile(game, j * 32  , i * 32 + 16 + (k * 32) - (h/4 * 32), 1));
+                this.grid[i].push(new Tile(game, j * 32  , i * 32 + 16 + (k * 32) - (h/4 * 32), 1));
                 k++;
             }
             else 
             {
-                this.grid.push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0));
+                this.grid[i].push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0));
             }
             
         }
     }
+    console.log(this.grid[10][10]);
 }
 
 Grid.prototype.update = function() {
