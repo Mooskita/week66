@@ -7,6 +7,7 @@ Game.Game = function(game) {
 };
 
 Game.Game.prototype.create = function() {
+    game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(-1024, -1024, 2048, 2048);
 
     
@@ -14,13 +15,14 @@ Game.Game.prototype.create = function() {
     
     let index = 0;
     
-    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 1)
+    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 100)
     /*
     this.enemies.push(game.add.sprite(300, 200, 'ShufflerDude'));
     this.enemies[index].animations.add('Dance');
     this.enemies[index++].animations.play('Dance', 12, true);
     */
     
+    this.grid.sorting.add(this.player);
     
     game.camera.follow(this.player);
     
@@ -36,6 +38,8 @@ Game.Game.prototype.create = function() {
 
 Game.Game.prototype.update = function() {
     //console.log('Running...\n');
+    this.grid.sorting.sort('y', Phaser.Group.SORT_ASCENDING);
+    game.physics.arcade.collide(this.player, this.grid.blocking, collisionHandler, processHandler, this);
     var isFalling = true;
     for (var i = 0; i < this.grid.grid.length; i++) {
         for (var j = 0; j < this.grid.grid[i].length; j++) {
@@ -57,4 +61,12 @@ function checkOverlap(spriteA, spriteB) {
 
     return Phaser.Rectangle.intersects(boundsA, boundsB);
 
+}
+
+function processHandler(player, blocking) {
+    return true;
+}
+
+function collisionHandler(player, blocking) {
+    player.bounce();
 }

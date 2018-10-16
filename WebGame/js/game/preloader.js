@@ -9,7 +9,9 @@ Game.Preloader.prototype.preload = function() {
     */
     game.load.spritesheet('ShufflerDude', './assets/ShufflerDude001Dance001.png', 64, 64, 16);
     game.load.spritesheet('FlashTiles', './assets/PHFlashTiles.png', 64, 64, 4);
+    game.load.image('Statue_A', './assets/Statue.png', 64, 128);
 
+    game.load.script('obstacle.js', './js/game/obstacle.js');
     game.load.script('tile.js', './js/game/tile.js');
     game.load.script('grid.js', './js/game/grid.js');
     game.load.script('player.js', './js/game/player.js');
