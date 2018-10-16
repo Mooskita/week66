@@ -7,6 +7,8 @@ Game.Preloader.prototype.preload = function() {
     /*
     Here you'll load the game assets.
     */
+    game.load.audio('VaporTheme',  ['./assets/Vaporcrap.ogg', './assets/Vaporcrap.mp3']);
+    
     game.load.spritesheet('ShufflerDude', './assets/ShufflerDude001Dance001.png', 64, 64, 16);
     game.load.spritesheet('DiscoStue', './assets/DiscoStue001Dance001.png', 64, 80, 4);
     game.load.spritesheet('FlashTiles', './assets/PHFlashTiles.png', 64, 64, 4);
@@ -21,9 +23,9 @@ Game.Preloader.prototype.preload = function() {
     game.load.script('healthhearth.js', './js/game/healthhearth.js');
     game.load.script('player.js', './js/game/player.js');
     
-    
+  
 };
 
 Game.Preloader.prototype.create = function() {
-    game.state.start('Game'); // Starting the game state.
+    game.state.start('MainMenu'); // Starting the game state.
 };

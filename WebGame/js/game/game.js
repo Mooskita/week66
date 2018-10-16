@@ -11,9 +11,16 @@ Game.Game.prototype.create = function() {
     game.world.setBounds(-1024, -1024, 2048, 2048);
 
     
-    this.grid = new Grid(game, 20, 20);
     
-    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 60);
+    this.grid = new Grid(game, 20, 20);
+    let x = -1;
+    let y = -1;
+    do {
+        x = game.rnd.integer() % 20;
+        y = game.rnd.integer() % 20;
+    }
+    while (this.grid.grid[x][y] == null)
+    this.player = new Player(game, this.grid.grid[x][y].x, this.grid.grid[x][10].y, 60);
     
     this.player.registerGrid(this.grid);
     this.grid.sorting.add(this.player);
@@ -21,7 +28,7 @@ Game.Game.prototype.create = function() {
     game.camera.follow(this.player);
     
     game.camera.scale.x += this.zoomAmount;
-    game.camera.scale.y += this.zoomAmount;
+    game.camera.scale.y += this.zoomAmount;y
 
     game.camera.bounds.x = game.camera.bounds.x * game.camera.scale.x;
     game.camera.bounds.y = game.camera.bounds.y * game.camera.scale.y;
