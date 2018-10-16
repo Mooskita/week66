@@ -54,8 +54,8 @@ Player.prototype.update = function() {
         this.body.velocity.y = this.moveSpeed * Math.sin(ang);
     }
     if (Math.pow(this.destX - this.x, 2) < 2 || Math.pow( this.destY - this.y, 2) < 2) {
-        this.velocity.x = 0;
-        this.velocity.y = 0;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
         this.x = this.destX;
         this.y = this.destY;
         this.isMoving = false;
