@@ -7,7 +7,7 @@ Game.MainMenu = function(game) {
 
 Game.MainMenu.prototype.create = function () {
     this.song = game.sound.play('VaporTheme');
-    let textNode = document.createTextNode("N e w    G a m e");
+    let textNode = document.createTextNode("N E W  G A M E");
     this.newGameButton.appendChild(textNode);
     this.newGameButton.id = 'newGame';
     this.newGameButton.onclick = this.startGame;

@@ -1,57 +1,35 @@
 console.log('js/game/grid.js');
 Grid = function (game, w, h) {
-    this.grid = [];
-    this.obstacles = [];
-    this.blocking = game.add.physicsGroup();
-    this.ground = game.add.physicsGroup();
-    this.sorting = game.add.group();
-    this.enemies = [];
-    this.blocking.enableBody = true;
-    
-    let k;
-    for (var i = 0; i < w; i++) {
-        this.grid.push([]);
+    this.tileArray = [];
+    this.isoGroup = game.add.group();
 
-        k = 0;
-        for (var j = 0; j < h; j++) {
-            let debug = null;
-            if ((game.rnd.integer() % 100) < 90) {
-                if (j % 2 == 1)
-                {
-                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + 16 + (k * 32) - (h/4 * 32), 1, debug));
-                    k++;
-                }
-                else 
-                {
-                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0, debug));
-                }
-                this.ground.add(this.grid[i][j]);
+    var size = 34;
+    
+    var i = 0, tile;
+    var j = 0;
+    for (var x = 32 * w; x > 0; x -= size){
+        this.tileArray.push([]);
+        for (var y = 32 * h; y > 0; y -= size) {
+            tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
+            game.physics.isoArcade.enable(tile);
+            tile.anchor.set(0.5);
+            tile.body.collideWorldBounds = true;
+            tile.body.immovable = true;
+            //tile.body.bounce.set(1, 1, 0.2);
+            //tile.body.drag.set(100, 100, 0);
+            if (( j) % 2 == 0) {
+                tile.frame = 2;
                 
             } else {
-                this.grid[i].push(null);
-                if (j % 2 == 1) {
-                    k++;
-                }
+                tile.frame = 1;
             }
+            this.tileArray[i].push(tile);
+            j++;
         }
+        i++;
     }
-    for (var i = 0; i < w; i++) {
-        this.obstacles.push([]);
-        this.enemies.push([]);
-        for (var j = 0; j < h; j++) {
-            if (this.grid[i][j] != null && (game.rnd.integer() % 100) > 95) {
-                let obstacle = new Obstacle(game, this.grid[i][j].x, this.grid[i][j].y);
-                this.obstacles[i].push(obstacle);
-                
-                this.blocking.add(obstacle);
-                this.sorting.add(obstacle);
-            } else if (this.grid[i][j] != null && (game.rnd.integer() % 100) > 85) {
-                this.enemies[i].push(new Enemy(game, this.grid[i][j].x, this.grid[i][j].y));
-            } else {
-                this.enemies[i].push(null)
-                this.obstacles[i].push(null);
-            }
-        }
-    }
-    game.world.bringToTop(this.sorting);
+}
+
+Grid.prototype.update = function() {
+    
 }

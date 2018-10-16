@@ -9,7 +9,7 @@ Tile = function(game, x, y, type, debug) {
     }
     this.debug = debug;
     game.physics.enable(this, Phaser.Physics.ARCADE);
-    this.body.setSize(46, 34, 10, 15);
+    this.body.setSize(96, 48, -12, 6);
     this.anchor.setTo(0.5, 0.5);
     
     this.count = 0;
@@ -22,7 +22,7 @@ Tile.prototype.constructor = Tile;
 
 Tile.prototype.update = function() {
     if (this.debug != null) 
-        game.debug.text(this.debug, this.x, this.y, "{color: 'rgba(0, 255, 0, 1)'}", "{fontSize: 8px}");
+        game.debug.body(this)
     this.count++;
     
     if (this.count % 48 == 0) {

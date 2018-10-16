@@ -9,12 +9,12 @@ body {
 
 article {
     position:absolute;
-    width: 800px;
-    height: 600px;
+    width: 1366px;
+    height: 768px;
     z-index: 15;
     left: 50%;
     top: 50%;
-    margin: -300px 0 0 -400px;
+    margin: -344px 0 0 -683px;
 }
 #gameWindow {
     
@@ -66,4 +66,8 @@ article {
     border-bottom-color: moccasin;
     border-left-color: moccasin;
     font-weight: bolder;
+}
+
+article p {
+    
 }

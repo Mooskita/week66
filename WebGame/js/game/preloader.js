@@ -2,11 +2,14 @@ var Game = {};
 Game.Preloader = function(game) {
     
 };
-
+Game.Preloader.prototype.init = function() {
+    
+}
 Game.Preloader.prototype.preload = function() {
     /*
     Here you'll load the game assets.
     */
+    
     game.load.audio('VaporTheme',  ['./assets/Vaporcrap.ogg', './assets/Vaporcrap.mp3']);
     
     game.load.spritesheet('ShufflerDude', './assets/ShufflerDude001Dance001.png', 64, 64, 16);
@@ -15,7 +18,7 @@ Game.Preloader.prototype.preload = function() {
     game.load.spritesheet('HealthHearth', './assets/HealthHearth.png', 34, 33, 5);
     game.load.image('Statue_A', './assets/Statue.png', 64, 128);
 
-    
+    game.load.script('phaser-plugin-isometric.js', './js/lib/phaser-plugin-isometric.js');
     game.load.script('enemy.js', './js/game/enemy.js');
     game.load.script('obstacle.js', './js/game/obstacle.js');
     game.load.script('tile.js', './js/game/tile.js');
@@ -28,4 +31,5 @@ Game.Preloader.prototype.preload = function() {
 
 Game.Preloader.prototype.create = function() {
     game.state.start('MainMenu'); // Starting the game state.
+    //game.state.start('Game');
 };

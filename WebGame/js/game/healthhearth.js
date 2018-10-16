@@ -1,11 +1,12 @@
 console.log('js/game/healthhearth.js')
 HealthHearth = function(game, charge, number) {
    
+    this.number = number;
     this.charge = charge;
     this.hearth = document.createElement('img');
     this.hearth.src = './assets/HealthHearth.png';
     this.hearth.id = 'hearth';
-    document.querySelectorAll('#hearthContainer')[number].appendChild(this.hearth);
+    document.querySelectorAll('#hearthContainer')[this.number].appendChild(this.hearth);
     console.log(this.hearth.style);
     
 }
@@ -36,4 +37,8 @@ HealthHearth.prototype.update = function() {
             break;
             
     }
+}
+
+HealthHearth.prototype.clean = function() {
+    document.querySelectorAll('#hearthContainer')[this.number].removeChild(this.hearth);
 }
