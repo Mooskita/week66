@@ -35,7 +35,7 @@ Player = function(game, x, y, speed) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
     game.add.existing(this);
-    console.log(this.body.x + " " + this.body.y);
+    console.log(this.x + " " + this.y);
     console.log(this.x + " " + this.y);
     
     /**/
@@ -47,49 +47,49 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function() {
     game.debug.bodyInfo(this, 32 , 32);
     if (this.isMoving) {
-        this.animations.play('Dance',6, false);
-        let ang = game.physics.arcade.angleBetween({x: this.body.x, y: this.body.y}, {x: this.destX, y: this.destY});
-        let dist  = Math.sqrt(Math.pow(this.destX - this.body.x) + Math.pow(this.destY - this.body.y));
-        this.body.velocity.x = this.moveSpeed * Math.cos(ang);
-        this.body.velocity.y = this.moveSpeed * Math.sin(ang);
+        this.animations.play('Dance', 24, false);
+        let ang = game.physics.arcade.angleBetween({x: this.x, y: this.y}, {x: this.destX, y: this.destY});
+        let dist  = Math.sqrt(Math.pow(this.destX - this.x) + Math.pow(this.destY - this.y));
+        this.velocity.x = this.moveSpeed * Math.cos(ang);
+        this.velocity.y = this.moveSpeed * Math.sin(ang);
     }
-    if (Math.pow(this.destX - this.body.x, 2) < 2 || Math.pow( this.destY - this.body.y, 2) < 2) {
-        this.body.velocity.x = 0;
-        this.body.velocity.y = 0;
-        this.body.x = this.destX;
-        this.body.y = this.destY;
+    if (Math.pow(this.destX - this.x, 2) < 2 || Math.pow( this.destY - this.y, 2) < 2) {
+        this.velocity.x = 0;
+        this.velocity.y = 0;
+        this.x = this.destX;
+        this.y = this.destY;
         this.isMoving = false;
-        this.startX = this.body.x;
-        this.startY = this.body.y;
+        this.startX = this.x;
+        this.startY = this.y;
     }
 }
 
 Player.prototype.moveUp = function () {
     if (!this.isMoving) {
         this.isMoving = true;
-        this.destX = this.body.x + 32;
-        this.destY = this.body.y - 16;
+        this.destX = this.x + 32;
+        this.destY = this.y - 16;
     }
 }
 Player.prototype.moveLeft = function () {
     if (!this.isMoving) {
         this.isMoving = true;
-        this.destX = this.body.x - 32;
-        this.destY = this.body.y - 16;
+        this.destX = this.x - 32;
+        this.destY = this.y - 16;
     }
 }
 Player.prototype.moveDown = function () {
     if (!this.isMoving) {
         this.isMoving = true;
-        this.destX = this.body.x - 32;
-        this.destY = this.body.y + 16;
+        this.destX = this.x - 32;
+        this.destY = this.y + 16;
     }
 }
 Player.prototype.moveRight = function () {
     if (!this.isMoving) {
         this.isMoving = true;
-        this.destX = this.body.x + 32;
-        this.destY = this.body.y + 16;
+        this.destX = this.x + 32;
+        this.destY = this.y + 16;
     }
 }
 
