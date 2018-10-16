@@ -39,7 +39,7 @@ Game.Game.prototype.update = function() {
     var isFalling = true;
     for (var i = 0; i < this.grid.grid.length; i++) {
         for (var j = 0; j < this.grid.grid[i].length; j++) {
-            if (!this.grid.grid[i][j] == null && checkOverlap(this.player, this.grid.grid[i][j])) {
+            if (this.grid.grid[i][j] != null && checkOverlap(this.player, this.grid.grid[i][j])) {
                 isFalling = false;
                 this.player.body.gravity.y = 0;
             }
