@@ -17,7 +17,7 @@ Game.MainMenu.prototype.create = function () {
     console.log('Main Menu!');
 }
 Game.MainMenu.prototype.startGame = function() {
-    this.song.pause();
+    //this.song.pause();
     document.getElementById('gameArticle').removeChild(document.getElementById('newGame'));
     game.state.start('Game');    
 }
