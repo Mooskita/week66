@@ -1,0 +1,40 @@
+body {
+    width: 1920px;
+    height: 1080px;
+    background-image: url('../assets/BackgroundB.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+article {
+    position:absolute;
+    width: 800px;
+    height: 600px;
+    z-index: 15;
+    left: 50%;
+    top: 50%;
+    margin: -300px 0 0 -400px;
+}
+#gameWindow {
+    
+}
+
+#hearthsContainer {
+    display: flex;
+    align-items: center;
+    width 100%;
+    
+}
+#hearthContainer {
+    width: 120px;
+    height: 120px;
+    
+}
+#hearth {
+    border-style:none;
+    object-fit: cover;
+    object-position: 0 0;
+    
+    width: 120px;
+    height: 120px;
+}

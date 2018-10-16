@@ -5,12 +5,14 @@ Grid = function (game, w, h) {
     this.blocking = game.add.physicsGroup();
     this.ground = game.add.physicsGroup();
     this.sorting = game.add.group();
+    this.enemies = [];
     this.blocking.enableBody = true;
     
     
     let k;
     for (var i = 0; i < w; i++) {
         this.grid.push([]);
+        this.enemies.push([]);
         k = 0;
         for (var j = 0; j < h; j++) {
             let debug = null;
@@ -25,12 +27,14 @@ Grid = function (game, w, h) {
                     this.grid[i].push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0, debug));
                 }
                 this.ground.add(this.grid[i][j]);
+                
             } else {
                 this.grid[i].push(null);
                 if (j % 2 == 1) {
                     k++;
                 }
             }
+            this.enemies[i].push(null);
         }
     }
     for (var i = 0; i < w; i++) {

@@ -1,11 +1,11 @@
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
 
-app.use('/', express.static(__dirname + '/WebGame'));
+app.use(express.static(__dirname + '/WebGame'));
 
 app.get('/', (req, res) => {
-    res.SendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(process.env.PORT || 8080, function() {

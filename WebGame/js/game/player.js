@@ -21,6 +21,9 @@ Player = function(game, x, y, speed) {
     this.key_D.onDown.add(this.moveRight, this);
     
     
+    this.health = [];
+    this.health.push(new HealthHearth(game, 5));
+    
     
     this.isMoving = false;
     this.grid = null;
@@ -117,6 +120,9 @@ Player.prototype.bounce = function() {
 
 Player.prototype.isValidMove = function(modx, mody) {
     if (this.grid.obstacles[this.gridX + modx + 1][this.gridY + mody] == null) {
+        if (this.grid.enemies[this.gridX + modx + 1][this.gridY + mody] != null) {
+            this.player.looseLife();
+        }
         return true;
     }
     else
@@ -125,4 +131,11 @@ Player.prototype.isValidMove = function(modx, mody) {
 
 Player.prototype.registerGrid = function(grid) {
     this.grid = grid;
+}
+Player.prototype.looseLife = function() {
+    this.health--;
+    if (this.health <= 0) {
+        console.log('GameOver state!');
+        //game.state.start('GameOver');
+    }
 }
