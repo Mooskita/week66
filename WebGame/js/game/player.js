@@ -2,7 +2,9 @@ console.log('js/game/player.js');
 Player = function(game, x, y, speed) {
     Phaser.Sprite.call(this, game, x, y, 'ShufflerDude');
     
-    this.anchor.setTo(0.5, 0.5);
+    this.animations.add('Dance');
+    
+    this.anchor.setTo(0.5, 0.6);
     
     this.key_W = game.input.keyboard.addKey(Phaser.Keyboard.W);
     this.key_A = game.input.keyboard.addKey(Phaser.Keyboard.A);
@@ -17,10 +19,14 @@ Player = function(game, x, y, speed) {
     
     this.key_D.onDown.add(this.moveRight, this);
     
+    
+    
     this.isMoving = false;
     this.destX = x;
     this.destY = y;
     this.moveSpeed = speed;
+    
+   
     
     game.physics.arcade.enable(this);
     
@@ -36,6 +42,7 @@ Player.prototype.constructor = Player;
 Player.prototype.update = function() {
     if (this.isMoving) {
         console.log('Moving...');
+        this.animations.play('Dance',12, false);
         game.physics.arcade.moveToXY(this, this.destX, this.destY, this.moveSpeed, 100);
     }
     if (Math.pow(this.x - this.destX, 2) < 2 || Math.pow(this.y - this.destY, 2) < 2) {

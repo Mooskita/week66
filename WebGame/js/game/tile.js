@@ -24,7 +24,7 @@ Tile.prototype.constructor = Tile;
 Tile.prototype.update = function() {
     this.count++;
     
-    if (this.count % 24 == 0) {
+    if (this.count % 48 == 0) {
         if (this.frame == 1) {
             this.frame = 0;
         } else if (this.frame == 0) {
