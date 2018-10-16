@@ -39,7 +39,9 @@ Game.Game.prototype.create = function() {
 Game.Game.prototype.update = function() {
     //console.log('Running...\n');
     this.grid.sorting.sort('y', Phaser.Group.SORT_ASCENDING);
-    game.physics.arcade.collide(this.player, this.grid.blocking, collisionHandler, processHandler, this);
+    if (game.physics.arcade.collide(this.player, this.grid.blocking, collisionHandler, processHandler, this)) {
+        console.log('Collision');
+    }
     var isFalling = true;
     if (game.physics.arcade.overlap(this.player, this.grid.ground)) {
         isFalling = false;

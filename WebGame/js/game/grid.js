@@ -49,5 +49,5 @@ Grid = function (game, w, h) {
             }
         }
     }
-    game.world.bringToTop(this.blocking);
+    game.world.bringToTop(this.sorting);
 }

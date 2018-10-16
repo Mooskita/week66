@@ -17,5 +17,6 @@ Obstacle.prototype = Object.create(Phaser.Sprite.prototype);
 Obstacle.prototype.constructor = Obstacle;
 
 Obstacle.prototype.update = function() {
+  
     game.debug.body(this);
 }

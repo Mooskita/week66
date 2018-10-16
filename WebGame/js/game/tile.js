@@ -8,7 +8,7 @@ Tile = function(game, x, y, type, debug = null) {
         this.frame = 3;
     }
     game.physics.enable(this, Phaser.Physics.ARCADE);
-    this.body.setSize(50, 20, 8, 27);
+    this.body.setSize(46, 34, 10, 15);
     this.anchor.setTo(0.5, 0.5);
     
     game.add.existing(this);

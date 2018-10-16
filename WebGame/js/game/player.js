@@ -33,7 +33,7 @@ Player = function(game, x, y, speed) {
     
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.anchor.setTo(0.5, 0.4);
-    this.body.setSize(20,20, 22, 34);
+    this.body.setSize(20,20, 22, 48);
     
     game.add.existing(this);
     console.log(this.x + " " + this.y);
