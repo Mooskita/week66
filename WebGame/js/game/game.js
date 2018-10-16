@@ -41,13 +41,13 @@ Game.Game.prototype.update = function() {
         for (var j = 0; j < this.grid.grid[i].length; j++) {
             if (!this.grid.grid[i][j] == null && checkOverlap(this.player, this.grid.grid[i][j])) {
                 isFalling = false;
+                this.player.body.gravity.y = 0;
             }
             
         }
     }
     if (isFalling) {
         this.player.body.gravity.y = 50000;
-        console.log('Gravity!');
     }
 };
 
