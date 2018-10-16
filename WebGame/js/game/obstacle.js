@@ -6,7 +6,7 @@ Obstacle = function (game, x, y) {
     this.anchor.setTo(0.5, 0.875);
     this.body.setSize(80,32, -8, 100);
     
-    this.body.immovable = true;
+    //this.body.immovable = true;
     
     game.add.existing(this);
     
@@ -17,6 +17,4 @@ Obstacle.prototype = Object.create(Phaser.Sprite.prototype);
 Obstacle.prototype.constructor = Obstacle;
 
 Obstacle.prototype.update = function() {
-  
-    game.debug.body(this);
 }

@@ -13,15 +13,16 @@ Grid = function (game, w, h) {
         this.grid.push([]);
         k = 0;
         for (var j = 0; j < h; j++) {
+            let debug = null;
             if ((game.rnd.integer() % 100) < 90) {
                 if (j % 2 == 1)
                 {
-                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + 16 + (k * 32) - (h/4 * 32), 1));
+                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + 16 + (k * 32) - (h/4 * 32), 1, debug));
                     k++;
                 }
                 else 
                 {
-                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0));
+                    this.grid[i].push(new Tile(game, j * 32  , i * 32 + (k * 32) - (h/4 * 32), 0, debug));
                 }
                 this.ground.add(this.grid[i][j]);
             } else {

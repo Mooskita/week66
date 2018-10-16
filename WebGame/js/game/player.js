@@ -23,6 +23,9 @@ Player = function(game, x, y, speed) {
     
     
     this.isMoving = false;
+    this.grid = null;
+    this.gridX = 10;
+    this.gridY = 10;
     this.startX = x;
     this.startY = y;
     this.destX = x;
@@ -33,11 +36,10 @@ Player = function(game, x, y, speed) {
     
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.anchor.setTo(0.5, 0.4);
-    this.body.setSize(20,20, 22, 48);
+    this.body.setSize(18,18, 24, 50);
+    
     
     game.add.existing(this);
-    console.log(this.x + " " + this.y);
-    console.log(this.x + " " + this.y);
     
     /**/
 }
@@ -46,7 +48,10 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-    game.debug.body(this);
+  
+    if (this.body.checCollision) {
+        game.debug.body(this, 'rgba(255,0,0,0.8)');
+    }
     if (this.isMoving) {
         this.animations.play('Dance', 18, false);
         let ang = game.physics.arcade.angleBetween({x: this.x, y: this.y}, {x: this.destX, y: this.destY});
@@ -67,36 +72,57 @@ Player.prototype.update = function() {
 }
 
 Player.prototype.moveUp = function () {
-    if (!this.isMoving) {
+    
+    if (!this.isMoving && this.isValidMove(-1, 1)) {
         this.isMoving = true;
         this.destX = this.x + 32;
         this.destY = this.y - 16;
+        this.gridX--;
+        this.gridY++;
     }
 }
 Player.prototype.moveLeft = function () {
-    if (!this.isMoving) {
+    if (!this.isMoving && this.isValidMove(0, -1)) {
         this.isMoving = true;
         this.destX = this.x - 32;
         this.destY = this.y - 16;
+        this.gridY--;
     }
 }
 Player.prototype.moveDown = function () {
-    if (!this.isMoving) {
+    if (!this.isMoving && this.isValidMove(1, -1)) {
         this.isMoving = true;
         this.destX = this.x - 32;
         this.destY = this.y + 16;
+        this.gridX++;
+        this.gridY--;
     }
 }
 Player.prototype.moveRight = function () {
-    if (!this.isMoving) {
+    if (!this.isMoving && this.isValidMove(0, 1)) {
         this.isMoving = true;
         this.destX = this.x + 32;
         this.destY = this.y + 16;
+        this.gridY++;
     }
 }
 
 Player.prototype.bounce = function() {
     console.log('Collision');
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
     player.body.x = this.startX;
     player.body.y = this.startY;
+}
+
+Player.prototype.isValidMove = function(modx, mody) {
+    if (this.grid.obstacles[this.gridX + modx + 1][this.gridY + mody] == null) {
+        return true;
+    }
+    else
+        return false;
+}
+
+Player.prototype.registerGrid = function(grid) {
+    this.grid = grid;
 }

@@ -1,6 +1,6 @@
 Game.Game = function(game) {
-    this.zoomAmount = 0.5;
     this.grid;
+    this.zoomAmount = 0.5;
     this.enemies = [];
     this.player;
     this.gameWorld;
@@ -22,6 +22,7 @@ Game.Game.prototype.create = function() {
     this.enemies[index++].animations.play('Dance', 12, true);
     */
     
+    this.player.registerGrid(this.grid);
     this.grid.sorting.add(this.player);
     
     game.camera.follow(this.player);
@@ -48,7 +49,7 @@ Game.Game.prototype.update = function() {
     }
     if (isFalling) {
         this.grid.ground.enable = false;
-        this.player.body.gravity.y = 50000;
+        this.player.body.gravity.y = 20000;
     }
 };
 

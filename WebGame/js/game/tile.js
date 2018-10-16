@@ -1,5 +1,5 @@
 console.log('js/game/tile.js');
-Tile = function(game, x, y, type, debug = null) {
+Tile = function(game, x, y, type, debug) {
     Phaser.Sprite.call(this, game, x, y, 'FlashTiles');
     
     if (type == 0) {
@@ -7,23 +7,22 @@ Tile = function(game, x, y, type, debug = null) {
     } else if (type == 1) {
         this.frame = 3;
     }
+    this.debug = debug;
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.setSize(46, 34, 10, 15);
     this.anchor.setTo(0.5, 0.5);
     
-    game.add.existing(this);
-    
     this.count = 0;
-    if (debug != null) {
-        game.debug.text(debug);
-    }
+    
+    game.add.existing(this);
 }
 
 Tile.prototype = Object.create(Phaser.Sprite.prototype);
 Tile.prototype.constructor = Tile;
 
 Tile.prototype.update = function() {
-    //game.debug.body(this);
+    if (this.debug != null) 
+        game.debug.text(this.debug, this.x, this.y, "{color: 'rgba(0, 255, 0, 1)'}", "{fontSize: 8px}");
     this.count++;
     
     if (this.count % 48 == 0) {
