@@ -13,17 +13,7 @@ Game.Game.prototype.create = function() {
     
     this.grid = new Grid(game, 20, 20);
     
-    let index = 0;
-    
-    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 60)
-    
-    this.enemies.push(new Enemy(game, this.grid.grid[4][3].x, this.grid.grid[4][3].y));
-    this.enemies.push(new Enemy(game, this.grid.grid[7][5].x, this.grid.grid[7][5].y));
-    this.enemies.push(new Enemy(game, this.grid.grid[12][17].x, this.grid.grid[12][17].y));
-
-    this.grid.enemies[4][3] = this.enemies[0];
-    this.grid.enemies[7][5] = this.enemies[1];
-    this.grid.enemies[12][17] = this.enemies[2];
+    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 60);
     
     this.player.registerGrid(this.grid);
     this.grid.sorting.add(this.player);

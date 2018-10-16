@@ -8,11 +8,10 @@ Grid = function (game, w, h) {
     this.enemies = [];
     this.blocking.enableBody = true;
     
-    
     let k;
     for (var i = 0; i < w; i++) {
         this.grid.push([]);
-        this.enemies.push([]);
+
         k = 0;
         for (var j = 0; j < h; j++) {
             let debug = null;
@@ -34,22 +33,22 @@ Grid = function (game, w, h) {
                     k++;
                 }
             }
-            this.enemies[i].push(null);
         }
     }
     for (var i = 0; i < w; i++) {
         this.obstacles.push([]);
-        k = 0;
+        this.enemies.push([]);
         for (var j = 0; j < h; j++) {
-            if (j % 2 == 1) {
-                k++;
-                
-            }
             if (this.grid[i][j] != null && (game.rnd.integer() % 100) > 95) {
-                this.obstacles[i].push(new Obstacle(game, this.grid[i][j].x, this.grid[i][j].y));
-                this.blocking.add(this.obstacles[i][j]);
-                this.sorting.add(this.obstacles[i][j]);
+                let obstacle = new Obstacle(game, this.grid[i][j].x, this.grid[i][j].y);
+                this.obstacles[i].push(obstacle);
+                
+                this.blocking.add(obstacle);
+                this.sorting.add(obstacle);
+            } else if (this.grid[i][j] != null && (game.rnd.integer() % 100) > 85) {
+                this.enemies[i].push(new Enemy(game, this.grid[i][j].x, this.grid[i][j].y));
             } else {
+                this.enemies[i].push(null)
                 this.obstacles[i].push(null);
             }
         }

@@ -13,10 +13,11 @@ Game.Preloader.prototype.preload = function() {
     game.load.spritesheet('HealthHearth', './assets/HealthHearth.png', 34, 33, 5);
     game.load.image('Statue_A', './assets/Statue.png', 64, 128);
 
+    
+    game.load.script('enemy.js', './js/game/enemy.js');
     game.load.script('obstacle.js', './js/game/obstacle.js');
     game.load.script('tile.js', './js/game/tile.js');
     game.load.script('grid.js', './js/game/grid.js');
-    game.load.script('enemy.js', './js/game/enemy.js');
     game.load.script('healthhearth.js', './js/game/healthhearth.js');
     game.load.script('player.js', './js/game/player.js');
     

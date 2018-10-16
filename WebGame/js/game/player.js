@@ -22,7 +22,9 @@ Player = function(game, x, y, speed) {
     
     
     this.health = [];
-    this.health.push(new HealthHearth(game, 5));
+    this.health.push(new HealthHearth(game, 5, 0));
+    this.health.push(new HealthHearth(game, 5, 1));
+    this.health.push(new HealthHearth(game, 5, 2));
     
     
     this.isMoving = false;
@@ -51,7 +53,9 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-  
+    for (var i = 0; i < 3; i++) {
+        this.health[i].update();
+    }
     if (this.body.checCollision) {
         game.debug.body(this, 'rgba(255,0,0,0.8)');
     }
@@ -121,7 +125,8 @@ Player.prototype.bounce = function() {
 Player.prototype.isValidMove = function(modx, mody) {
     if (this.grid.obstacles[this.gridX + modx + 1][this.gridY + mody] == null) {
         if (this.grid.enemies[this.gridX + modx + 1][this.gridY + mody] != null) {
-            this.player.looseLife();
+            this.looseLife();
+            return false;
         }
         return true;
     }
@@ -133,9 +138,14 @@ Player.prototype.registerGrid = function(grid) {
     this.grid = grid;
 }
 Player.prototype.looseLife = function() {
-    this.health--;
-    if (this.health <= 0) {
-        console.log('GameOver state!');
-        //game.state.start('GameOver');
+    console.log('lifeloss');
+    if (this.health[2].charge > 0) {
+        this.health[2].charge--;
+    } else if (this.health[1].charge > 0) {
+        this.health[1].charge--;
+    } else if (this.health[0].charge > 0) {
+        this.health[0].charge--;
+    } else {
+        console.log('Game over');
     }
 }

@@ -1,4 +1,4 @@
-console.log('js/game/objstacle.js');
+console.log('js/game/obstacle.js');
 Obstacle = function (game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'Statue_A');
     
