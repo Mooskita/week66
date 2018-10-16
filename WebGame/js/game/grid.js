@@ -3,7 +3,7 @@ Grid = function (game, w, h) {
     this.grid = [];
     this.obstacles = [];
     this.blocking = game.add.physicsGroup();
-    this.ground = game.add.group();
+    this.ground = game.add.physicsGroup();
     this.sorting = game.add.group();
     this.blocking.enableBody = true;
     

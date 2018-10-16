@@ -7,7 +7,8 @@ Tile = function(game, x, y, type, debug = null) {
     } else if (type == 1) {
         this.frame = 3;
     }
-    
+    game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.body.setSize(50, 20, 8, 27);
     this.anchor.setTo(0.5, 0.5);
     
     game.add.existing(this);
@@ -22,6 +23,7 @@ Tile.prototype = Object.create(Phaser.Sprite.prototype);
 Tile.prototype.constructor = Tile;
 
 Tile.prototype.update = function() {
+    //game.debug.body(this);
     this.count++;
     
     if (this.count % 48 == 0) {

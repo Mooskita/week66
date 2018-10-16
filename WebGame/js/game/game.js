@@ -15,7 +15,7 @@ Game.Game.prototype.create = function() {
     
     let index = 0;
     
-    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 100)
+    this.player = new Player(game, this.grid.grid[10][10].x, this.grid.grid[10][10].y, 60)
     /*
     this.enemies.push(game.add.sprite(300, 200, 'ShufflerDude'));
     this.enemies[index].animations.add('Dance');
@@ -41,16 +41,11 @@ Game.Game.prototype.update = function() {
     this.grid.sorting.sort('y', Phaser.Group.SORT_ASCENDING);
     game.physics.arcade.collide(this.player, this.grid.blocking, collisionHandler, processHandler, this);
     var isFalling = true;
-    for (var i = 0; i < this.grid.grid.length; i++) {
-        for (var j = 0; j < this.grid.grid[i].length; j++) {
-            if (this.grid.grid[i][j] != null && checkOverlap(this.player, this.grid.grid[i][j])) {
-                isFalling = false;
-                this.player.body.gravity.y = 0;
-            }
-            
-        }
+    if (game.physics.arcade.overlap(this.player, this.grid.ground)) {
+        isFalling = false;
     }
     if (isFalling) {
+        this.grid.ground.enable = false;
         this.player.body.gravity.y = 50000;
     }
 };

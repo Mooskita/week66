@@ -4,7 +4,6 @@ Player = function(game, x, y, speed) {
     
     this.animations.add('Dance');
     
-    //this.anchor.setTo(0.5, 0.5);
     
     
     
@@ -33,6 +32,8 @@ Player = function(game, x, y, speed) {
    
     
     game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.anchor.setTo(0.5, 0.4);
+    this.body.setSize(20,20, 22, 34);
     
     game.add.existing(this);
     console.log(this.x + " " + this.y);
@@ -45,9 +46,9 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.update = function() {
-    game.debug.bodyInfo(this, 32 , 32);
+    game.debug.body(this);
     if (this.isMoving) {
-        this.animations.play('Dance', 24, false);
+        this.animations.play('Dance', 18, false);
         let ang = game.physics.arcade.angleBetween({x: this.x, y: this.y}, {x: this.destX, y: this.destY});
         let dist  = Math.sqrt(Math.pow(this.destX - this.x) + Math.pow(this.destY - this.y));
         this.body.velocity.x = this.moveSpeed * Math.cos(ang);
@@ -61,6 +62,7 @@ Player.prototype.update = function() {
         this.isMoving = false;
         this.startX = this.x;
         this.startY = this.y;
+        this.frame = 0;
     }
 }
 
