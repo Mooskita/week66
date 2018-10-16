@@ -1,6 +1,9 @@
 console.log('js/game/grid.js');
 Grid = function (game, w, h) {
     this.grid = [];
+    this.obstacles = [];
+    
+    
     
     let k;
     for (var i = 0; i < w; i++) {
@@ -23,11 +26,19 @@ Grid = function (game, w, h) {
                     k++;
                 }
             }
-            
-            
         }
     }
-    console.log(this.grid[10][10]);
+    for (var i = 0; i < w; i++) {
+        this.obstacles.push([]);
+        for (var j = 0; j < h; j++) {
+            if (this.grid[i][j] != null && game.rnd.integer() % 100 > 90) {
+                
+            } else {
+                this.obstacles[i].push(null);
+            }
+        }
+    }
+    
 }
 /*
 Grid.prototype.update = function() {

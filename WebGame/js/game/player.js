@@ -4,7 +4,9 @@ Player = function(game, x, y, speed) {
     
     this.animations.add('Dance');
     
-    this.anchor.setTo(0.5, 0.6);
+    this.anchor.setTo(0.5, 0.5);
+    
+    
     
     this.key_W = game.input.keyboard.addKey(Phaser.Keyboard.W);
     this.key_A = game.input.keyboard.addKey(Phaser.Keyboard.A);
