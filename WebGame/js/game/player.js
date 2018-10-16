@@ -50,8 +50,8 @@ Player.prototype.update = function() {
         this.animations.play('Dance', 24, false);
         let ang = game.physics.arcade.angleBetween({x: this.x, y: this.y}, {x: this.destX, y: this.destY});
         let dist  = Math.sqrt(Math.pow(this.destX - this.x) + Math.pow(this.destY - this.y));
-        this.velocity.x = this.moveSpeed * Math.cos(ang);
-        this.velocity.y = this.moveSpeed * Math.sin(ang);
+        this.body.velocity.x = this.moveSpeed * Math.cos(ang);
+        this.body.velocity.y = this.moveSpeed * Math.sin(ang);
     }
     if (Math.pow(this.destX - this.x, 2) < 2 || Math.pow( this.destY - this.y, 2) < 2) {
         this.velocity.x = 0;
