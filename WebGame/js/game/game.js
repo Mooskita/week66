@@ -23,7 +23,7 @@ Game.Game.prototype.init = function() {
 Game.Game.prototype.create = function() {
     this.grid = new Grid(game, 20, 20);
     let sprite = game.add.isoSprite(200, 200, 0,'ShufflerDude', 0, this.grid.isoGroup);
-    this.player = new Player(game, sprite, 100);
+    this.player = new Player(game, sprite, 80);
     this.player.registerTileMap({map: this.grid.tileArray});
    
 };

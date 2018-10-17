@@ -21,14 +21,24 @@ Grid.prototype.update = function() {
 Grid.prototype.destroy = function() {
     var x = -1;
     var y = -1;
+    var isValid = false;
     for (var i = 0; i < this.tileArray.length; i++) {
+        var x = game.rnd.integer % this.tileA
         for (var j = 0; j < this.tileArray[i].length; j++) {
             if (this.tileArray[i][j].body.collideWorldBounds) {
-                x = i;
-                y = j;
+                isValid = true;
             }
         }
     }
+    
+    while (isValid) {
+        x = game.rnd.integer() % this.tileArray.length;
+        y = game.rnd.integer() % this.tileArray[0].length;
+        if (this.tileArray[x][y].body.collideWorldBounds) {
+            isValid = false;
+        }
+    }
+    
     if (x != -1 && y != -1)
         this.tileArray[x][y].body.collideWorldBounds = false;
 }
