@@ -13,7 +13,7 @@ Game.Preloader.prototype.preload = function() {
     /*
     Here you'll load the game assets.
     */
-    
+    game.load.audio('NewGameSound', './assets/NewGame.ogg');
     game.load.audio('VaporTheme',  ['./assets/Vaporcrap.ogg', './assets/Vaporcrap.mp3']);
     
     game.load.spritesheet('ShufflerDude', './assets/ShufflerDude001Dance001.png', 64, 64, 16);

@@ -106,7 +106,7 @@ Game.GameOver.prototype.update = function() {
             article.removeChild(article.firstChild);
         }
         document.querySelector('#gameWindow').removeChild(article);
-
+        game.sound.play('NewGameSound');
         game.state.start('Game');
         
     }

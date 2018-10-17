@@ -25,6 +25,7 @@ Game.MainMenu.prototype.update = function () {
 }
 Game.MainMenu.prototype.startGame = function() {
     console.log('clicked');
+    game.sound.play('NewGameSound');
     document.getElementById('gameArticle').removeChild(document.getElementById('newGame'));
-    game.state.start('Game');    
+    game.state.start('SelectionMenu');    
 }

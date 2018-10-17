@@ -22,8 +22,12 @@ Game.Game.prototype.init = function() {
 
 Game.Game.prototype.create = function() {
     this.grid = new Grid(game, 20, 20);
-    let sprite = game.add.isoSprite(200, 200, 0,'ShufflerDude', 0, this.grid.isoGroup);
-    this.player = new Player(game, sprite, 80);
+    
+    
+    let name = (selection == 0 ? 'ShufflerDude' : 'DiscoStue');
+    let animation = (selection == 0 ? 18 : 8 );
+    let sprite = game.add.isoSprite(200, 200, 0, name, 0, this.grid.isoGroup);
+    this.player = new Player(game, sprite, 80, animation);
     this.player.registerTileMap({map: this.grid.tileArray});
    
 };

@@ -1,5 +1,5 @@
 console.log('js/game/player.js');
-Player = function(game, sprite, speed) {
+Player = function(game, sprite, speed, animation) {
     this.sprite = sprite;
     this.speed = speed;
     this.tileMap;
@@ -59,7 +59,7 @@ Player = function(game, sprite, speed) {
     
     this.lastZ = this.sprite.body.z;
     
-    this.sprite.animations.play('Dance', 18, true);
+    this.sprite.animations.play('Dance', animation, true);
 }
 
 Player.prototype.update = function () {
