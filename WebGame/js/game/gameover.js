@@ -2,6 +2,8 @@ Game.GameOver = function(game) {
 }
 
 Game.GameOver.prototype.create = function() {
+    //songA = game.sound.play('VaporTheme1',1, true);
+    songA.resume();
     scores.push(Score);
     
     
@@ -11,7 +13,7 @@ Game.GameOver.prototype.create = function() {
     this.sort(scores);
     
     
-    
+    console.log('A');
     
     let index = 0;
     let text = document.createTextNode("G A M E  O V E R");
@@ -41,11 +43,11 @@ Game.GameOver.prototype.create = function() {
     gameover[index].appendChild(text);
     gameover[index++].id = 'num';
     
-    for (let i = 0; i < scores.length; i++) {
-        if (i >= 3) {
-            
-        } 
-        else if (scores[i] == Score) {
+    console.log('B');
+    
+    let length = (scores.length <= 3 ? scores.length : 3);
+    for (let i = 0; i < length; i++) {
+        if (scores[i] == Score) {
             text = document.createTextNode("Y O U : " + scores[i]);
             gameover.push(document.createElement('p'));
             gameover[index].appendChild(text);
@@ -59,7 +61,7 @@ Game.GameOver.prototype.create = function() {
         }
     }
     
-    
+    console.log('C');
 
     
     text = document.createTextNode("- - - - - - - - - - - - - - - - - - - - - - - -");
@@ -75,7 +77,7 @@ Game.GameOver.prototype.create = function() {
     let div = document.createElement('span');
     div.classList.add('gameOver');
     
-    for (let i = 0; i < index; i++) {
+    for (let i = 0; i < gameover.length; i++) {
         div.appendChild(gameover[i]);
     }
     document.querySelector('#gameWindow').appendChild(div);
@@ -90,8 +92,8 @@ Game.GameOver.prototype.sort = function(list) {
         for (var j = 1; j < list.length; j++) {
             if (list[j - 1] < list[j]) {
                 var tmp = list[j];
-                list[j] = list[j];
-                list[j] = tmp;
+                list[j] = list[j - 1];
+                list[j - 1] = tmp;
                 swapped = true;
             }
         }
@@ -102,16 +104,21 @@ Game.GameOver.prototype.update = function() {
     console.log('game over...');
     if (this.space.isDown) {
         var article = document.querySelector('.gameOver');
-        while(article.firstChild) {
+        while(article.firstChild != null) {
             article.removeChild(article.firstChild);
         }
         document.querySelector('#gameWindow').removeChild(article);
         game.sound.play('NewGameSound');
         //songB.pause();
         //songA.resume();
+        songA.pause();
         game.state.start('SelectionMenu');
         
     }
    
 }
+Game.GameOver.prototype.shutdown = function() {
+    this.game.world.removeAll();
+}
+
 

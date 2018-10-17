@@ -115,8 +115,10 @@ Player.prototype.update = function () {
 }
 
 Player.prototype.gameOver = function() {
-    if (this.sprite.body.velocity.z <= -500)
+    if (this.sprite.body.velocity.z <= -500) {
+        songA.pause();
         game.state.start('GameOver');
+    }
 }
 
 Player.prototype.registerTileMap = function(tileMap) {

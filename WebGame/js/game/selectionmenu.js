@@ -4,6 +4,7 @@ Game.SelectionMenu = function(game) {
 }
 
 Game.SelectionMenu.prototype.create = function() {
+    songA.resume();
     this.characterA = game.add.sprite(200, 200, 'ShufflerDude');
     this.characterB = game.add.sprite(1366 - 584, 200, 'DiscoStue');
     
@@ -58,6 +59,7 @@ Game.SelectionMenu.prototype.selectA = function(){
     //songB.resume();
     game.sound.play('CharacterSelect');
     selection = 0;
+    songA.pause();
     game.state.start('Game');
 }
 
@@ -67,5 +69,6 @@ Game.SelectionMenu.prototype.selectB = function(){
     //songB.resume();
     game.sound.play('CharacterSelect');
     selection = 1;
+    songA.pause();
     game.state.start('Game');
 }

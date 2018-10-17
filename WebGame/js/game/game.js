@@ -21,6 +21,7 @@ Game.Game.prototype.init = function() {
 }
 
 Game.Game.prototype.create = function() {
+    songA.resume();
     this.grid = new Grid(game, 20, 20);
     
     
@@ -39,3 +40,7 @@ Game.Game.prototype.update = function() {
     game.iso.simpleSort(this.grid.isoGroup);
     
 };
+
+Game.Game.prototype.shutdown = function() {
+    this.game.world.removeAll();
+}

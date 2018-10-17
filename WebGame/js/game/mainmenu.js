@@ -3,7 +3,7 @@ Game.MainMenu = function(game) {
 }
 
 Game.MainMenu.prototype.create = function () {
-    songA = game.sound.play('VaporTheme1', true);
+    songA = game.sound.play('VaporTheme1',1, true);
     
     
     
@@ -27,6 +27,10 @@ Game.MainMenu.prototype.startGame = function() {
     console.log('clicked');
     game.sound.play('NewGameSound');
     document.getElementById('gameArticle').removeChild(document.getElementById('newGame'));
-    
+    songA.pause();
     game.state.start('SelectionMenu');    
+}
+
+Game.MainMenu.prototype.shutdown = function() {
+    this.game.world.removeAll();
 }
