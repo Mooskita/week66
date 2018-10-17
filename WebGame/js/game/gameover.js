@@ -107,7 +107,9 @@ Game.GameOver.prototype.update = function() {
         }
         document.querySelector('#gameWindow').removeChild(article);
         game.sound.play('NewGameSound');
-        game.state.start('Game');
+        songB.pause();
+        songA.resume();
+        game.state.start('SelectionMenu');
         
     }
    

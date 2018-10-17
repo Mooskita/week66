@@ -2,7 +2,8 @@ var Game = {};
 var scores = [];
 var Score = 0;
 var scoreMod = 1;
-var song;
+var songA;
+var songB;
 Game.Preloader = function(game) {
     
 };
@@ -13,6 +14,8 @@ Game.Preloader.prototype.preload = function() {
     /*
     Here you'll load the game assets.
     */
+    game.load.audio('VaporTheme1',  ['./assets/Vaporcrap1Mix.ogg', './assets/Vaporcrap1Mix.mp3']);
+    game.load.audio('VaporTheme2',  ['./assets/Vaporcrap2.ogg', './assets/Vaporcrap2.mp3']);
     game.load.audio('NewGameSound', './assets/NewGame.ogg');
     game.load.audio('VaporTheme',  ['./assets/Vaporcrap.ogg', './assets/Vaporcrap.mp3']);
     
