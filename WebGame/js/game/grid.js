@@ -12,6 +12,7 @@ Grid = function (game, w, h) {
 Grid.prototype.update = function() {
     if (this.count % 30 == 0) {
         this.alternate();
+        Score += scoreMod;
     }
     if (this.count % 5 == 0) {
         this.destroy();
@@ -22,6 +23,7 @@ Grid.prototype.update = function() {
     }
     this.updateObstacles();
     this.count++;
+    console.log(Score);
 }
 
 Grid.prototype.respawn = function() {

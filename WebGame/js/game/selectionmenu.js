@@ -21,10 +21,10 @@ Game.SelectionMenu.prototype.create = function() {
     
     
     this.characterA.animations.play('Dance', 18, true);
-    this.characterB.animations.play('Dance', 6, true);
+    this.characterB.animations.play('Dance', 8, true);
     
-    songB = game.sound.play('VaporTheme1', true);
-    songB.pause();
+    //songB = game.sound.play('VaporTheme1', true);
+    //songB.pause();
 }
 
 Game.SelectionMenu.prototype.update = function() {
@@ -54,16 +54,18 @@ Game.SelectionMenu.prototype.update = function() {
 
 
 Game.SelectionMenu.prototype.selectA = function(){
-    songA.pause();
-    songB.resume();
+    //songA.pause();
+    //songB.resume();
+    game.sound.play('CharacterSelect');
     selection = 0;
     game.state.start('Game');
 }
 
 
 Game.SelectionMenu.prototype.selectB = function(){
-    songA.pause();
-    songB.resume();
+    //songA.pause();
+    //songB.resume();
+    game.sound.play('CharacterSelect');
     selection = 1;
     game.state.start('Game');
 }

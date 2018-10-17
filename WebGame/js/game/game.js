@@ -37,5 +37,5 @@ Game.Game.prototype.update = function() {
     this.player.update();
     game.physics.isoArcade.collide(this.grid.isoGroup);
     game.iso.simpleSort(this.grid.isoGroup);
-    Score += scoreMod;
+    
 };
