@@ -1,4 +1,7 @@
 var Game = {};
+var scores = [];
+var Score = 0;
+var scoreMod = 1;
 Game.Preloader = function(game) {
     
 };

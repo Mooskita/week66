@@ -13,11 +13,41 @@ Grid.prototype.update = function() {
     if (this.count % 30 == 0) {
         this.alternate();
     }
-    if (this.count % 15 == 0) {
+    if (this.count % 5 == 0) {
         this.destroy();
+        scoreMod++;
+    }
+    if (this.count % 10 == 0) {
+        this.respawn();
     }
     this.updateObstacles();
     this.count++;
+}
+
+Grid.prototype.respawn = function() {
+    var x = -1;
+    var y = -1;
+    var isValid = false;
+    for (var i = 0; i < this.tileArray.length; i++) {
+        for (var j = 0; j < this.tileArray[i].length; j++) {
+            if (!this.tileArray[i][j].body.collideWorldBounds) {
+                isValid = true;
+            }
+        }
+    }
+    
+    while (isValid) {
+        x = game.rnd.integer() % this.tileArray.length;
+        y = game.rnd.integer() % this.tileArray[0].length;
+        if (!this.tileArray[x][y].body.collideWorldBounds) {
+            isValid = false;
+        }
+    }
+    
+    if (x != -1 && y != -1) {
+        this.tileArray[x][y].body.z = this.tileArray[x][y].start;
+        this.tileArray[x][y].body.collideWorldBounds = true;
+    }
 }
 
 Grid.prototype.updateObstacles = function() {
@@ -34,7 +64,6 @@ Grid.prototype.destroy = function() {
     var y = -1;
     var isValid = false;
     for (var i = 0; i < this.tileArray.length; i++) {
-        var x = game.rnd.integer % this.tileA
         for (var j = 0; j < this.tileArray[i].length; j++) {
             if (this.tileArray[i][j].body.collideWorldBounds) {
                 isValid = true;
@@ -73,7 +102,11 @@ Grid.prototype.alternate = function() {
 
 Grid.prototype.generate = function(w, h) {
     var size = 34;
-    var i = 0, tile, obstacle;
+    var i = 0, obstacle;
+    var tile = {
+        start: 0,
+        tile: null
+    };
     var j = 0;
     for (var x = 0; x < 32 * w; x += size){
         this.tileArray.push([]);
@@ -85,19 +118,19 @@ Grid.prototype.generate = function(w, h) {
             } else {
                 this.obstacleArray[i].push(null);
             }
-            tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
-            game.physics.isoArcade.enable(tile);
-            tile.anchor.set(0.5);
-            tile.body.collideWorldBounds = true;
-            tile.body.immovable = true;
-            tile.world.x;
+            tile.tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
+            game.physics.isoArcade.enable(tile.tile);
+            tile.tile.anchor.set(0.5);
+            tile.tile.body.collideWorldBounds = true;
+            tile.tile.body.immovable = true;
+            tile.start = tile.tile.body.z;
             if (( j) % 2 == 0) {
-                tile.frame = 2;
+                tile.tile.frame = 2;
                 
             } else {
-                tile.frame = 0;
+                tile.tile.frame = 0;
             }
-            this.tileArray[i].push(tile);
+            this.tileArray[i].push(tile.tile);
             j++;
         }
         i++;

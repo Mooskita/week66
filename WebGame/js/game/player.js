@@ -23,11 +23,16 @@ Player = function(game, sprite, speed) {
     this.D = game.input.keyboard.addKey(Phaser.Keyboard.D);
     this.W = game.input.keyboard.addKey(Phaser.Keyboard.W);
     this.S = game.input.keyboard.addKey(Phaser.Keyboard.S);
-    /*
+    
+    this.isJumping = true;
+    
     this.space.onDown.add(function () {
-        this.sprite.body.velocity.z = 300;
+        if (this.sprite.body.velocity.z == 0 && this.isJumping == false) {
+            this.sprite.body.velocity.z = 200;
+            this.isJumping = true;
+        }
     }, this);
-    */
+    
     game.physics.isoArcade.enable(this.sprite);
     
     this.sprite.checkWorldBounds = true;
@@ -49,11 +54,16 @@ Player = function(game, sprite, speed) {
     
     this.tileX = this.sprite.body.x;
     this.tileY = this.sprite.body.y;
+    
+    this.lastZ = this.sprite.body.z;
 }
 
 Player.prototype.update = function () {
-
-    //game.debug.body(this.sprite);
+    if (this.lastZ == this.sprite.body.z) {
+        this.isJumping = false;
+    }
+    this.lastZ = this.sprite.body.z;
+    //console.log(Math.floor(this.lastZ));
     //game.debug.text("Here!", this.tileX, this.tileY);
 
 
@@ -101,7 +111,8 @@ Player.prototype.update = function () {
 }
 
 Player.prototype.gameOver = function() {
-    game.state.start('GameOver');
+    if (this.sprite.body.velocity.z <= -500)
+        game.state.start('GameOver');
 }
 
 Player.prototype.registerTileMap = function(tileMap) {
