@@ -1,6 +1,7 @@
 console.log('js/game/grid.js');
 Grid = function (game, w, h) {
     this.tileArray = [];
+    this.obstacleArray = [];
     this.isoGroup = game.add.group();
 
     this.generate(w, h);
@@ -15,7 +16,17 @@ Grid.prototype.update = function() {
     if (this.count % 15 == 0) {
         this.destroy();
     }
+    this.updateObstacles();
     this.count++;
+}
+
+Grid.prototype.updateObstacles = function() {
+    this.obstacleArray.forEach( function(row) {
+        row.forEach(function (obj) {
+            if (obj != null)
+                obj.update();
+        });
+    });
 }
 
 Grid.prototype.destroy = function() {
@@ -62,11 +73,18 @@ Grid.prototype.alternate = function() {
 
 Grid.prototype.generate = function(w, h) {
     var size = 34;
-    var i = 0, tile;
+    var i = 0, tile, obstacle;
     var j = 0;
     for (var x = 0; x < 32 * w; x += size){
         this.tileArray.push([]);
+        this.obstacleArray.push([]);
         for (var y = 0; y < 32 * h; y += size) {
+            if (game.rnd.integer() % 100 > 95) {
+                obstacle = game.add.isoSprite(x, y, 0, 'Statue_A', 0, this.isoGroup);
+                this.obstacleArray[i].push(new Obstacle(game, obstacle));
+            } else {
+                this.obstacleArray[i].push(null);
+            }
             tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
             game.physics.isoArcade.enable(tile);
             tile.anchor.set(0.5);
