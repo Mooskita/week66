@@ -2,6 +2,7 @@ var Game = {};
 var scores = [];
 var Score = 0;
 var scoreMod = 1;
+var song;
 Game.Preloader = function(game) {
     
 };
@@ -17,7 +18,7 @@ Game.Preloader.prototype.preload = function() {
     
     game.load.spritesheet('ShufflerDude', './assets/ShufflerDude001Dance001.png', 64, 64, 16);
     game.load.spritesheet('DiscoStue', './assets/DiscoStue001Dance001.png', 64, 80, 4);
-    game.load.spritesheet('FlashTiles', './assets/PHFlashTiles.png', 64, 64, 4);
+    game.load.spritesheet('FlashTiles', './assets/PHFlashTiles.png', 64, 64, 5);
     game.load.spritesheet('HealthHearth', './assets/HealthHearth.png', 34, 33, 5);
     game.load.image('Statue_A', './assets/Statue.png', 64, 128);
 

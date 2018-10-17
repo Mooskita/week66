@@ -45,7 +45,9 @@ Grid.prototype.respawn = function() {
     }
     
     if (x != -1 && y != -1) {
-        this.tileArray[x][y].body.z = this.tileArray[x][y].start;
+        console.log("Respawn");
+        this.tileArray[x][y].frame = game.rnd.integer() % 4;
+        this.tileArray[x][y].body.z = 0;
         this.tileArray[x][y].body.collideWorldBounds = true;
     }
 }
@@ -79,8 +81,11 @@ Grid.prototype.destroy = function() {
         }
     }
     
-    if (x != -1 && y != -1)
+    if (x != -1 && y != -1) {
+        this.tileArray[x][y].frame = 4;
+        this.tileArray[x][y].body.velocity.z = 50;
         this.tileArray[x][y].body.collideWorldBounds = false;
+    }
 }
 
 Grid.prototype.alternate = function() {
@@ -102,11 +107,7 @@ Grid.prototype.alternate = function() {
 
 Grid.prototype.generate = function(w, h) {
     var size = 34;
-    var i = 0, obstacle;
-    var tile = {
-        start: 0,
-        tile: null
-    };
+    var i = 0, tile, obstacle;
     var j = 0;
     for (var x = 0; x < 32 * w; x += size){
         this.tileArray.push([]);
@@ -118,19 +119,19 @@ Grid.prototype.generate = function(w, h) {
             } else {
                 this.obstacleArray[i].push(null);
             }
-            tile.tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
-            game.physics.isoArcade.enable(tile.tile);
-            tile.tile.anchor.set(0.5);
-            tile.tile.body.collideWorldBounds = true;
-            tile.tile.body.immovable = true;
-            tile.start = tile.tile.body.z;
+            tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
+            game.physics.isoArcade.enable(tile);
+            tile.anchor.set(0.5);
+            tile.body.collideWorldBounds = true;
+            tile.body.immovable = true;
+
             if (( j) % 2 == 0) {
-                tile.tile.frame = 2;
+                tile.frame = 2;
                 
             } else {
-                tile.tile.frame = 0;
+                tile.frame = 0;
             }
-            this.tileArray[i].push(tile.tile);
+            this.tileArray[i].push(tile);
             j++;
         }
         i++;
@@ -173,17 +174,5 @@ Grid.prototype.sort = function(array) {
         }
     }
     
-    swapped = true;
-    while (swapped) {
-        swapped = false;
-        for (var j = 1; j < sorted.length; j++) {
-            if (sorted[j - 1][0].world.x > sorted[j][0].world.x) {
-                var tmp = sorted[j];
-                sorted[j] = sorted[j];
-                sorted[j] = tmp;
-                swapped = true;
-            }
-        }
-    }
-    return sorted;
+  
 }

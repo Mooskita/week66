@@ -76,7 +76,6 @@ article {
 }
 .gameOver p {
     text-align: center;
-    color: lightgreen;
     font-size: 26px;
     font-weight:bold;
 }
@@ -100,4 +99,11 @@ canvas p:nth-child(6) {
 }
 canvas p:nth-child(7) {
     top: 300px;
+}
+
+#new {
+    color: gold;
+}
+#num {
+    color: aquamarine;
 }

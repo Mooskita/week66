@@ -4,6 +4,8 @@ Player = function(game, sprite, speed) {
     this.speed = speed;
     this.tileMap;
     
+    this.sprite.animations.add('Dance');
+    
     this.cursors = game.input.keyboard.createCursorKeys();
 
     game.input.keyboard.addKeyCapture([
@@ -43,8 +45,8 @@ Player = function(game, sprite, speed) {
     this.sprite.anchor.set(0.5);
     
     game.camera.follow(this.sprite);
-    
-    this.sprite.body.velocity.z = 300;
+
+    this.sprite.body.velocity.z = 200;
     
     this.isMoving = false;
     
@@ -56,6 +58,8 @@ Player = function(game, sprite, speed) {
     this.tileY = this.sprite.body.y;
     
     this.lastZ = this.sprite.body.z;
+    
+    this.sprite.animations.play('Dance', 18, true);
 }
 
 Player.prototype.update = function () {

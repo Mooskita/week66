@@ -3,8 +3,16 @@ Game.GameOver = function(game) {
 
 Game.GameOver.prototype.create = function() {
     scores.push(Score);
-    Score = 0;
+    
+    
     scoreMod = 1;
+    
+    
+    this.sort(scores);
+    
+    
+    
+    
     let index = 0;
     let text = document.createTextNode("G A M E  O V E R");
     let gameover = [];
@@ -36,7 +44,14 @@ Game.GameOver.prototype.create = function() {
     for (let i = 0; i < scores.length; i++) {
         if (i >= 3) {
             
-        } else {
+        } 
+        else if (scores[i] == Score) {
+            text = document.createTextNode("Y O U : " + scores[i]);
+            gameover.push(document.createElement('p'));
+            gameover[index].appendChild(text);
+            gameover[index++].id = 'new';
+        } 
+        else {
             text = document.createTextNode("Y O U : " + scores[i]);
             gameover.push(document.createElement('p'));
             gameover[index].appendChild(text);
@@ -65,7 +80,22 @@ Game.GameOver.prototype.create = function() {
     }
     document.querySelector('#gameWindow').appendChild(div);
     this.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    Score = 0;
+}
 
+Game.GameOver.prototype.sort = function(list) {
+  swapped = true;
+    while (swapped) {
+        swapped = false;
+        for (var j = 1; j < list.length; j++) {
+            if (list[j - 1] < list[j]) {
+                var tmp = list[j];
+                list[j] = list[j];
+                list[j] = tmp;
+                swapped = true;
+            }
+        }
+    }
 }
 
 Game.GameOver.prototype.update = function() {
