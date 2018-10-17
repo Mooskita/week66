@@ -24,11 +24,12 @@ Game.Game.prototype.create = function() {
     this.grid = new Grid(game, 20, 20);
     let sprite = game.add.isoSprite(200, 200, 0,'ShufflerDude', 0, this.grid.isoGroup);
     this.player = new Player(game, sprite, 100);
-    
+    this.player.registerTileMap({map: this.grid.tileArray});
    
 };
 
 Game.Game.prototype.update = function() {
+    this.grid.update();
     this.player.update();
     game.physics.isoArcade.collide(this.grid.isoGroup);
     game.iso.simpleSort(this.grid.isoGroup);
