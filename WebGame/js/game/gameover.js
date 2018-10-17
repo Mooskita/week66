@@ -45,21 +45,29 @@ Game.GameOver.prototype.create = function() {
     gameover[index].appendChild(text);
     gameover[index++].id = 'num';
     
+    let div = document.createElement('span');
     
     for (let i = 0; i < index; i++) {
-        document.getElementById('gameArticle').appendChild(gameover[i]);
+        div.appendChild(gameover[i]);
     }
-    this.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACE);
-    this.space.onDown.add(this.restart, this);
+    document.querySelector('#gameWindow').appendChild(div);
+    this.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
 }
 
-Game.GameOver.prototype.restart = function() {
-    let del = document.querySelectAll('#num');
-    let article = document.getElementById('gameArticle');
-    for (let i = del.length - 1; i >= 0 ; i++) {
-        article.removeChild(del[i]);
+Game.GameOver.prototype.update = function() {
+    console.log('game over...');
+    if (this.space.isDown) {
+        var article = document.querySelector('canvas');
+        while(article.firstChild) {
+            article.removeChild(article.firstChild);
+            
+        }
+        
+
+        game.state.start('Game');
+        
     }
-    
-    game.state.start('Game');
+   
 }
 

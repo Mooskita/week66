@@ -30,7 +30,8 @@ Player = function(game, sprite, speed) {
     */
     game.physics.isoArcade.enable(this.sprite);
     
-    
+    this.sprite.checkWorldBounds = true;
+    this.sprite.events.onOutOfBounds.add(this.gameOver, this);
     
     this.sprite.body.collideWorldBounds = false;
     
@@ -99,7 +100,9 @@ Player.prototype.update = function () {
     //console.log(this.sprite.world.y);
 }
 
-
+Player.prototype.gameOver = function() {
+    game.state.start('GameOver');
+}
 
 Player.prototype.registerTileMap = function(tileMap) {
     this.tileMap = tileMap.map;

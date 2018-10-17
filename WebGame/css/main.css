@@ -68,6 +68,38 @@ article {
     font-weight: bolder;
 }
 
-article p {
-    
+canvas span {
+    display: inline-block;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    z-index: 2000;
+
+}
+canvas span p {
+    text-align: center;
+    color: lightgreen;
+    font-size: 26px;
+    font-weight:bold;
+}
+canvas p:nth-child(1) {
+    top: 130px;
+}
+canvas p:nth-child(2) {
+    top: 160px;
+}
+canvas p:nth-child(3) {
+    top: 190px;
+}
+canvas p:nth-child(4) {
+    top: 210px;
+}
+canvas p:nth-child(5) {
+    top: 240px;
+}
+canvas p:nth-child(6) {
+    top: 270px;
+}
+canvas p:nth-child(7) {
+    top: 300px;
 }
