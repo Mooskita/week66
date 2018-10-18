@@ -41,7 +41,7 @@ Grid.prototype.respawn = function() {
     while (isValid) {
         x = game.rnd.integer() % this.tileArray.length;
         y = game.rnd.integer() % this.tileArray[0].length;
-        if (this.tileArray[i][j] != null && !this.tileArray[x][y].body.collideWorldBounds) {
+        if (this.tileArray[x][y] != null && !this.tileArray[x][y].body.collideWorldBounds) {
             isValid = false;
         }
     }
@@ -78,7 +78,7 @@ Grid.prototype.destroy = function() {
     while (isValid) {
         x = game.rnd.integer() % this.tileArray.length;
         y = game.rnd.integer() % this.tileArray[0].length;
-        if (this.tileArray[i][j] != null && this.tileArray[x][y].body.collideWorldBounds) {
+        if (this.tileArray[x][y] != null && this.tileArray[x][y].body.collideWorldBounds) {
             isValid = false;
         }
     }
