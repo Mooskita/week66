@@ -32,7 +32,7 @@ Grid.prototype.respawn = function() {
     var isValid = false;
     for (var i = 0; i < this.tileArray.length; i++) {
         for (var j = 0; j < this.tileArray[i].length; j++) {
-            if (!this.tileArray[i][j].body.collideWorldBounds) {
+            if (this.tileArray[i][j] != null && !this.tileArray[i][j].body.collideWorldBounds) {
                 isValid = true;
             }
         }
@@ -41,7 +41,7 @@ Grid.prototype.respawn = function() {
     while (isValid) {
         x = game.rnd.integer() % this.tileArray.length;
         y = game.rnd.integer() % this.tileArray[0].length;
-        if (!this.tileArray[x][y].body.collideWorldBounds) {
+        if (this.tileArray[i][j] != null && !this.tileArray[x][y].body.collideWorldBounds) {
             isValid = false;
         }
     }
@@ -69,7 +69,7 @@ Grid.prototype.destroy = function() {
     var isValid = false;
     for (var i = 0; i < this.tileArray.length; i++) {
         for (var j = 0; j < this.tileArray[i].length; j++) {
-            if (this.tileArray[i][j].body.collideWorldBounds) {
+            if (this.tileArray[i][j] != null && this.tileArray[i][j].body.collideWorldBounds) {
                 isValid = true;
             }
         }
@@ -78,7 +78,7 @@ Grid.prototype.destroy = function() {
     while (isValid) {
         x = game.rnd.integer() % this.tileArray.length;
         y = game.rnd.integer() % this.tileArray[0].length;
-        if (this.tileArray[x][y].body.collideWorldBounds) {
+        if (this.tileArray[i][j] != null && this.tileArray[x][y].body.collideWorldBounds) {
             isValid = false;
         }
     }
@@ -93,14 +93,17 @@ Grid.prototype.destroy = function() {
 Grid.prototype.alternate = function() {
     for (var i = 0; i < this.tileArray.length; i++) {
         for (var j = 0; j < this.tileArray[i].length; j++) {
-            if (this.tileArray[i][j].frame == 0) {
-                this.tileArray[i][j].frame = 1
-            } else if (this.tileArray[i][j].frame == 1) {
-                this.tileArray[i][j].frame = 0
-            } else if (this.tileArray[i][j].frame == 2) {
-                this.tileArray[i][j].frame = 3
-            } else if (this.tileArray[i][j].frame == 3) {
-                this.tileArray[i][j].frame = 2
+            if (this.tileArray[i][j] != null) {
+                
+                if (this.tileArray[i][j].frame == 0) {
+                    this.tileArray[i][j].frame = 1
+                } else if (this.tileArray[i][j].frame == 1) {
+                    this.tileArray[i][j].frame = 0
+                } else if (this.tileArray[i][j].frame == 2) {
+                    this.tileArray[i][j].frame = 3
+                } else if (this.tileArray[i][j].frame == 3) {
+                    this.tileArray[i][j].frame = 2
+                }
             }
         }
     }
