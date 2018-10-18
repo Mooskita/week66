@@ -29,10 +29,30 @@ Game.Preloader.prototype.preload = function() {
 };
 
 Game.Preloader.prototype.create = function() {
+    let button = document.createElement('button');
+    button.id = 'song';
+    let text = document.createTextNode("T H E M E 1");
+    button.appendChild(text);
+    button.onclick = switchSong;
+    
+    document.querySelector('body').appendChild(button);
+    
     game.state.start('MainMenu'); // Starting the game state.
     //game.state.start('Game');
 };
 
+function switchSong() {
+    let button = document.getElementById('song');
+    if (songA.isPlaying) {
+        button.textNode = "T H E M E 2";
+        songA.pause();
+        songB.resume();
+    } else {
+        button.textNode = "T H E M E 2";
+        songB.pause();
+        songA.resume();
+    }
+}
 
 //#####################
 // GAME STATES
@@ -62,7 +82,7 @@ Game.Game.prototype.init = function() {
 }
 
 Game.Game.prototype.create = function() {
-    songA.resume();
+
     this.grid = new Grid(game, 20, 20);
     
     
@@ -93,8 +113,10 @@ Game.MainMenu = function(game) {
 }
 
 Game.MainMenu.prototype.create = function () {
-    songA = game.sound.play('VaporTheme1',1, true);
-    
+    songA = game.sound.play('VaporTheme2',1, true);
+    songB = game.sound.play('VaporTheme1', 1, true);
+    songA.pause();
+    songB.pause();
     
     
     
@@ -102,7 +124,9 @@ Game.MainMenu.prototype.create = function () {
 }
 
 Game.MainMenu.prototype.update = function () {
-    if (songA.currentTime >= 3000 && !this.hasSpawned) {
+    if (songA.isPlaying) 
+        songB.pause();
+    if ((songA.currentTime >= 3000)&& !this.hasSpawned) {
         let textNode = document.createTextNode("N E W  G A M E");
         let newGameButton = document.createElement('button');
         newGameButton.appendChild(textNode);
@@ -117,7 +141,7 @@ Game.MainMenu.prototype.startGame = function() {
     console.log('clicked');
     game.sound.play('NewGameSound');
     document.getElementById('gameArticle').removeChild(document.getElementById('newGame'));
-    songA.pause();
+
     game.state.start('SelectionMenu');    
 }
 
@@ -132,7 +156,7 @@ Game.SelectionMenu = function(game) {
 }
 
 Game.SelectionMenu.prototype.create = function() {
-    songA.resume();
+
     this.characterA = game.add.sprite(200, 200, 'ShufflerDude');
     this.characterB = game.add.sprite(1366 - 584, 200, 'DiscoStue');
     
@@ -152,8 +176,7 @@ Game.SelectionMenu.prototype.create = function() {
     this.characterA.animations.play('Dance', 18, true);
     this.characterB.animations.play('Dance', 8, true);
     
-    //songB = game.sound.play('VaporTheme1', true);
-    //songB.pause();
+
 }
 
 Game.SelectionMenu.prototype.update = function() {
@@ -183,21 +206,18 @@ Game.SelectionMenu.prototype.update = function() {
 
 
 Game.SelectionMenu.prototype.selectA = function(){
-    //songA.pause();
-    //songB.resume();
+
     game.sound.play('CharacterSelect');
     selection = 0;
-    songA.pause();
+
     game.state.start('Game');
 }
 
 
 Game.SelectionMenu.prototype.selectB = function(){
-    //songA.pause();
-    //songB.resume();
+
     game.sound.play('CharacterSelect');
     selection = 1;
-    songA.pause();
     game.state.start('Game');
 }
 
@@ -206,8 +226,6 @@ Game.GameOver = function(game) {
 }
 
 Game.GameOver.prototype.create = function() {
-    //songA = game.sound.play('VaporTheme1',1, true);
-    songA.resume();
     scores.push(Score);
     
     
@@ -313,9 +331,6 @@ Game.GameOver.prototype.update = function() {
         }
         document.querySelector('#gameWindow').removeChild(article);
         game.sound.play('NewGameSound');
-        //songB.pause();
-        //songA.resume();
-        songA.pause();
         game.state.start('SelectionMenu');
         
     }
@@ -478,7 +493,6 @@ Player.prototype.update = function () {
 
 Player.prototype.gameOver = function() {
     if (this.sprite.body.velocity.z <= -500) {
-        songA.pause();
         game.state.start('GameOver');
     }
 }
