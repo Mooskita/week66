@@ -14,7 +14,7 @@ Grid.prototype.update = function() {
         this.alternate();
         Score += scoreMod;
     }
-    if (this.count % 5 == 0) {
+    if (this.count % 3 == 0) {
         this.destroy();
         scoreMod++;
     }
@@ -115,25 +115,28 @@ Grid.prototype.generate = function(w, h) {
         this.tileArray.push([]);
         this.obstacleArray.push([]);
         for (var y = 0; y < 32 * h; y += size) {
-            if (game.rnd.integer() % 100 > 95) {
-                obstacle = game.add.isoSprite(x, y, 0, 'Statue_A', 0, this.isoGroup);
-                this.obstacleArray[i].push(new Obstacle(game, obstacle));
-            } else {
-                this.obstacleArray[i].push(null);
-            }
-            tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
-            game.physics.isoArcade.enable(tile);
-            tile.anchor.set(0.5);
-            tile.body.collideWorldBounds = true;
-            tile.body.immovable = true;
+            if (w >= i*i && h >= j*j) {
+                if (game.rnd.integer() % 100 > 95) {
+                    obstacle = game.add.isoSprite(x, y, 0, 'Statue_A', 0, this.isoGroup);
+                    this.obstacleArray[i].push(new Obstacle(game, obstacle));
+                } else {
+                    this.obstacleArray[i].push(null);
+                }
+                tile = game.add.isoSprite(x, y, 0,'FlashTiles', 0, this.isoGroup);
+                game.physics.isoArcade.enable(tile);
+                tile.anchor.set(0.5);
+                tile.body.collideWorldBounds = true;
+                tile.body.immovable = true;
 
-            if (( j) % 2 == 0) {
-                tile.frame = 2;
-                
-            } else {
-                tile.frame = 0;
+                if (( j) % 2 == 0) {
+                    tile.frame = 2;
+
+                } else {
+                    tile.frame = 0;
+                }
+                this.tileArray[i].push(tile); 
             }
-            this.tileArray[i].push(tile);
+
             j++;
         }
         i++;

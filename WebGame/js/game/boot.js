@@ -6,7 +6,4 @@ game.state.add('MainMenu', Game.MainMenu);
 game.state.add('GameOver', Game.GameOver);
 game.state.add('SelectionMenu', Game.SelectionMenu);
 
-
-
-
 game.state.start('Preload');
