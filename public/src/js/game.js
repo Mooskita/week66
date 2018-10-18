@@ -44,11 +44,11 @@ Game.Preloader.prototype.create = function() {
 function switchSong() {
     let button = document.getElementById('song');
     if (songA.isPlaying) {
-        button.textNode = "T H E M E 2";
+        button.textNode.text = "T H E M E 2";
         songA.pause();
         songB.resume();
     } else {
-        button.textNode = "T H E M E 2";
+        button.textNode.text = "T H E M E 2";
         songB.pause();
         songA.resume();
     }
