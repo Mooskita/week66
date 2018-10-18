@@ -22,11 +22,11 @@ article {
 
 #newGame {
     position: absolute;
-    width: 360px;
-    height: 80px;
     z-index: 15;
     left: 50%;
     top: 50%;
+    width: 360px;
+    height: 80px;
     margin: -40px 0 0 -180px;
     
     background-color: moccasin;
@@ -92,6 +92,29 @@ canvas p:nth-child(9) {
 }
 #num {
     color: aquamarine;
+}
+#nameform[type="text"], textarea {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    
+    width: 60px;
+    height: 26px;
+    margin: -13px 0 0 -30px;
+    
+    background-color: moccasin;
+    border-bottom-color: cyan;
+    border-left-color: cyan;
+    border-top: none;
+    border-right: none;
+    border-width: 4px;
+    color: magenta;
+    font-family: monospace;
+    font-size: 26px;
+    font-weight: bold;
+}
+#nameform textarea {
+ 
 }
 #song {
     position: absolute;
