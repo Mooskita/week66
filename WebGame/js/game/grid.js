@@ -118,7 +118,7 @@ Grid.prototype.generate = function(w, h) {
         this.tileArray.push([]);
         this.obstacleArray.push([]);
         for (var y = 0; y < 32 * h; y += size) {
-            if (w >= i*i && h >= j*j) {
+            if (true) {
                 if (game.rnd.integer() % 100 > 95) {
                     obstacle = game.add.isoSprite(x, y, 0, 'Statue_A', 0, this.isoGroup);
                     this.obstacleArray[i].push(new Obstacle(game, obstacle));
@@ -138,6 +138,8 @@ Grid.prototype.generate = function(w, h) {
                     tile.frame = 0;
                 }
                 this.tileArray[i].push(tile); 
+            } else {
+                this.tileArray[i].push(null);
             }
 
             j++;
